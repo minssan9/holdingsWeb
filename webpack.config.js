@@ -5,7 +5,7 @@ module.exports = {
 //   //   ,
   entry: {
     home: 'home.js',
-    about: 'about.js',
+    about: 'vuejs_about.js',
   },
   optimization: {
     splitChunks: {
@@ -13,9 +13,10 @@ module.exports = {
     }
   },
   devServer: {
+    showEslintErrorsInOverlay: false,
     overlay: {
       warnings: true,
-      errors: true
+      // errors: true
     }
   }, 
     chainWebpack: (config) => {
