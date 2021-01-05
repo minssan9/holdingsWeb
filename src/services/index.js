@@ -1,6 +1,5 @@
 import axios from 'axios'
 import router from '../router'
-// import qs from 'qs'
 // import authRequest from '@/services/auth'
 
 

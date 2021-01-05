@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import store from '../store'
 
 import Home from '../views/Home.vue'
+import InvView from '../views/inv/InvView.vue'
 import VuejsAbout from '../views/VuejsAbout.vue'
 
 Vue.use(VueRouter)
@@ -42,6 +43,11 @@ const router = new VueRouter({
     {
       path: '/vuejs_about', 
       component: VuejsAbout
+    },
+    
+    {
+      path: '/inv', 
+      component: InvView
     }
   ]
 })
