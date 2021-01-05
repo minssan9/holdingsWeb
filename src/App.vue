@@ -1,7 +1,25 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/vuejs_about">About</router-link>
+  <div id="app">
+    <!-- <Navbar />  -->
+    <!-- <HelloWorld msg="Hello~~~~~~~~~" /> -->
+    <router-view></router-view>
+    <Footer />
   </div>
-  <router-view/>
 </template>
+
+<script>
+    // import HelloWorld from "./components/HelloWorld.vue";
+    // import Navbar from './components/base/Navbar.vue'
+    import Footer from './components/base/Footer.vue'
+
+    export default {
+    data () {
+      return {}
+    },
+        components: {
+            // HelloWorld,
+            // Navbar,
+            Footer
+        }
+    }
+</script>

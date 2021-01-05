@@ -1,17 +1,17 @@
 import axios from 'axios'
 import router from '../router'
-import qs from 'qs'
-import authRequest from '@/services/auth'
+// import qs from 'qs'
+// import authRequest from '@/services/auth'
 
 
 const DOMAIN = '/api'
 
-const BadRequest = 400
-const Unauthorized = 401
-const Forbidden = 403
-const NotFound = 404
+export const BadRequest = 400
+export const Unauthorized = 401
+export const Forbidden = 403
+export const NotFound = 404
 
-export const onUnauthorized = () => {
+export const onUnauthorized = (response) => {
   router.push(`/login?returnPath=${encodeURIComponent(location.pathname)}`)
   throw Error(response)
 }

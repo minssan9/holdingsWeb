@@ -1,33 +1,58 @@
 <template>
   <div class="menuList">
-    <router-link to="/general/itdamage/new" exact>New Post</router-link>
-    <table class="table table-striped table-bordered" id="menuTable">
+    <router-link
+      to="/general/itdamage/new"
+      exact
+    >
+      New Post
+    </router-link>
+    <table
+      id="menuTable"
+      class="table table-striped table-bordered"
+    >
       <tbody>
-        <tr v-for="data in dataList" v-bind:key="data.rtime" v-on:click="'tel:' + data.rtel">
-          <td class="d-none d-sm-block">{{data.class1}}</td>
-          <td class="d-none d-sm-block">{{data.co_gb}}</td>
-          <td class="d-none d-sm-block">{{data.rteam}}</td>
-          <td class="d-none d-sm-block ">
-            <a v-bind:href="'tel:' + data.rtel">{{data.rname}}</a></td>
+        <tr
+          v-for="data in dataList"
+          :key="data.rtime"
+          @click="'tel:' + data.rtel"
+        >
           <td class="d-none d-sm-block">
-            <a v-bind:href="'tel:' + data.rtel">{{data.rtel}}</a>
+            {{ data.class1 }}
           </td>
-          <td class=""><a v-bind:href="'tel:' + data.rtel">{{data.rtxt}}</a></td>
+          <td class="d-none d-sm-block">
+            {{ data.co_gb }}
+          </td>
+          <td class="d-none d-sm-block">
+            {{ data.rteam }}
+          </td>
+          <td class="d-none d-sm-block ">
+            <a :href="'tel:' + data.rtel">{{ data.rname }}</a>
+          </td>
+          <td class="d-none d-sm-block">
+            <a :href="'tel:' + data.rtel">{{ data.rtel }}</a>
+          </td>
+          <td class="">
+            <a :href="'tel:' + data.rtel">{{ data.rtxt }}</a>
+          </td>
           <td class="">
             <button
               v-show="data.attach"
               class="btn btn-indigo btn-sm"
               type="button"
               @click="fileDown(data)"
-            >다운로드</button>
+            >
+              다운로드
+            </button>
           </td>
           <td class="genre">
             <button
+              id="endDamage"
               class="btn btn-indigo btn-sm"
               type="button"
-              id="endDamage"
               @click="enditdamage(data)"
-            >완료</button>
+            >
+              완료
+            </button>
           </td>
         </tr>
       </tbody>
@@ -36,8 +61,12 @@
 </template>
 
 <script>
+import crudService from '../services/crudService'
 export default {
-  name: 'menuList',
+  name: 'MenuList',
+  props: {
+    msg: String
+  },
   data() {
     return {
       route:"general/itdamage",
@@ -47,9 +76,6 @@ export default {
       querydate: "",
       dataList: []
     };
-  },
-  props: {
-    msg: String
   },
   methods: { 
     getData() {
