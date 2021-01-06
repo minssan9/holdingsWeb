@@ -46,19 +46,19 @@ module.exports = {
         extensions: ['*', '.js', '.vue', '.json']
     },
     devServer: {
-        // proxyTable: {
-        //   '/api/shop': {
-        //     target: 'http://voyagerss.com/api/shop',
-        //     changeOrigin: true,
-        //     pathRewrite: {
-        //       '^/api/shop': ''
-        //     }
-        //   },
+        proxyTable: {
+          '/api': {
+            target: 'http://localhost:52000/api',
+            changeOrigin: true,
+            pathRewrite: {
+              '^/api': ''
+            }
+          },
         //   // '/images': {
         //   //   target: 'http://localhost:8081',
         //   //   changeOrigin: true
         //   // }
-        // },
+        },
         port:8081,
         historyApiFallback: true,
         noInfo: true,

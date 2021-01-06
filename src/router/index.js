@@ -4,6 +4,7 @@ import store from '../store'
 
 import Home from '../views/Home.vue'
 import InvView from '../views/inv/InvView.vue'
+import ItemView from '../views/item/ItemView.vue'
 import VuejsAbout from '../views/VuejsAbout.vue'
 
 Vue.use(VueRouter)
@@ -45,6 +46,10 @@ const router = new VueRouter({
       component: VuejsAbout
     },
     
+    {
+      path: '/item', 
+      component: ItemView
+    },
     {
       path: '/inv', 
       component: InvView
