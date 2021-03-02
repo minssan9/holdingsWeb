@@ -3,7 +3,8 @@ import router from '../router'
 // import authRequest from '@/services/auth'
 
 
-const DOMAIN = '/api'
+// const DOMAIN = '/api'
+const DOMAIN = '/'
 
 export const BadRequest = 400
 export const Unauthorized = 401

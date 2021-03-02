@@ -2,25 +2,20 @@
   <div id="app">
     <div class="container" style="width:600px">
       <div style="margin: 20px">
-        <h3>Halla Holdings</h3>
-        <h4>xxe_item_spec_info_tmp</h4>
-        <h4>item upload Files</h4>
+        <h3>{{ viewName }}</h3>
+        <h4>{{ functionName }}</h4>
       </div>
 
       <excel-upload></excel-upload>
-
-      <itemList></itemList>
-
     </div>
   </div>
 </template>
 
 <script>
 import ExcelUpload from "../../components/excel/excelUpload.vue";
-import ItemList from "../../components/item/ItemList.vue";
 
 export default {
-  name: "ItemView",
+  name: "InvView",
   data() {
     return {
       viewName: "defaultViewName",
@@ -31,8 +26,7 @@ export default {
     this.viewName =this.$route.path
   },
   components: {
-    ExcelUpload,
-    ItemList
+    ExcelUpload
   }
 };
 </script>

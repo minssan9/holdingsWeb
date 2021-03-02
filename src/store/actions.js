@@ -1,14 +1,16 @@
 // import {account, order, item, qna, review, auth, cart, chat, mail} from '../api'
-//
-// const actions = {
-//
-//   LOGIN({commit, dispatch}, playload) {
-//     return auth.login(playload)
-//       .then(({data}) => {
-//         commit('LOGIN', data.access_token)
-//         dispatch('FETCH_ACCOUNT')
-//       })
-//   },
+
+import {account} from '../services/auth'
+
+const actions = {
+
+  LOGIN({commit, dispatch}, playload) {
+    return account.login(playload)
+      .then(({data}) => {
+        commit('LOGIN', data.access_token)
+        dispatch('FETCH_ACCOUNT')
+      })
+  },
 //
 //   // 사용자
 //   FETCH_ACCOUNT({commit}) {
@@ -47,6 +49,6 @@
 //       })
 //   }
 //
-// }
-//
-// export default actions
+}
+
+export default actions

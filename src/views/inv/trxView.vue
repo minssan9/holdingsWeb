@@ -2,25 +2,22 @@
   <div id="app">
     <div class="container" style="width:600px">
       <div style="margin: 20px">
-        <h3>Halla Holdings</h3>
-        <h4>xxe_item_spec_info_tmp</h4>
-        <h4>item upload Files</h4>
+        <h4>Vue.js upload Files</h4>
       </div>
-
-      <excel-upload></excel-upload>
 
       <itemList></itemList>
 
+      <inv-file-upload></inv-file-upload>
     </div>
   </div>
 </template>
 
 <script>
 import ExcelUpload from "../../components/excel/excelUpload.vue";
-import ItemList from "../../components/item/ItemList.vue";
+import InvTrxList from "../../components/inv/trx/invTrxList.vue";
 
 export default {
-  name: "ItemView",
+  name: "InvTrxView",
   data() {
     return {
       viewName: "defaultViewName",
@@ -32,7 +29,7 @@ export default {
   },
   components: {
     ExcelUpload,
-    ItemList
+    InvTrxList
   }
 };
 </script>

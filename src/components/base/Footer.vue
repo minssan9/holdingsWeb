@@ -2,7 +2,7 @@
     <footer class="footer mt-5 modal-footer bg-light">
         <div class="container">
             <p class="text-dark text-center">
-                Copyright © Voyagers 2020
+                Copyright © Minssan9 2021
             </p>
         </div>
     </footer>

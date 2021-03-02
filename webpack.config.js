@@ -1,22 +1,60 @@
 var path = require('path')
 var webpack = require('webpack')
 
+function resolve(dir) {
+    return path.join(__dirname, '..', dir)
+}
+
 module.exports = {
     entry: './src/main.js',
     output: {
+        filename: '[name].js',
+        // path: path.join(__dirname, 'dist'), //경로
         path: path.resolve(__dirname, './dist'),
         publicPath: '/dist/',
         filename: 'build.js'
     },
+    resolve: {
+        alias: {
+            'vue$': 'vue/dist/vue.esm.js',
+            '@': resolve('src'),
+        },
+        extensions: ['*', '.js', '.vue', '.json']
+    },
+    devServer: {
+        proxy: {
+            '/api': {
+                target: 'http://localhost:52000',
+                changeOrigin: true,
+                pathRewrite: {
+                    '^/api': ''
+                }
+            },
+            //   // '/images': {
+            //   //   target: 'http://localhost:8081',
+            //   //   changeOrigin: true
+            //   // }
+        },
+        port: 8081,
+        historyApiFallback: true,
+        noInfo: true,
+        overlay: true,
+        disableHostCheck: true,
+    },
+    performance: {
+        hints: false
+    },
+    devtool: '#eval-source-map',
     module: {
         rules: [
+            // utils.styleLoaders({ sourceMap: config.dev.cssSourceMap, usePostCSS: true }),
             {
                 test: /\.css$/,
                 use: [
                     'vue-style-loader',
                     'css-loader'
                 ],
-            },      {
+            }, {
                 test: /\.vue$/,
                 loader: 'vue-loader',
                 options: {
@@ -37,57 +75,11 @@ module.exports = {
                     name: '[name].[ext]?[hash]'
                 }
             }
+            // ,
+            // {
+            //     test: /.s[a|c]ss$/,
+            //     loader: 'style!css!sass'
+            // }
         ]
     },
-    resolve: {
-        alias: {
-            'vue$': 'vue/dist/vue.esm.js'
-        },
-        extensions: ['*', '.js', '.vue', '.json']
-    },
-    devServer: {
-        proxyTable: {
-          '/api': {
-            target: 'http://localhost:52000/api',
-            changeOrigin: true,
-            pathRewrite: {
-              '^/api': ''
-            }
-          },
-        //   // '/images': {
-        //   //   target: 'http://localhost:8081',
-        //   //   changeOrigin: true
-        //   // }
-        },
-        port:8081,
-        historyApiFallback: true,
-        noInfo: true,
-        overlay: true,
-        disableHostCheck: true, 
-    },
-    performance: {
-        hints: false
-    },
-    devtool: '#eval-source-map'
-}
-
-if (process.env.NODE_ENV === 'production') {
-    module.exports.devtool = '#source-map'
-    // http://vue-loader.vuejs.org/en/workflow/production.html
-    module.exports.plugins = (module.exports.plugins || []).concat([
-        new webpack.DefinePlugin({
-            'process.env': {
-                NODE_ENV: '"production"'
-            }
-        }),
-        new webpack.optimize.UglifyJsPlugin({
-            sourceMap: true,
-            compress: {
-                warnings: false
-            }
-        }),
-        new webpack.LoaderOptionsPlugin({
-            minimize: true
-        })
-    ])
 }

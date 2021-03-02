@@ -13,28 +13,21 @@
       </div>
     </div>
 
-    <label class="btn btn-default">
-      <input type="file" ref="file" @change="selectFile" />
-    </label>
 
+    <label class="btn btn-default">
+      <input
+        type="file"
+        ref="file"
+        @change="selectFile"
+        accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+      />
+    </label>
     <button class="btn btn-success" :disabled="!selectedFiles" @click="upload">
       Upload
     </button>
 
     <div class="alert alert-light" role="alert">{{ message }}</div>
 
-    <div class="card">
-      <div class="card-header">List of Files</div>
-      <ul class="list-group list-group-flush">
-        <li
-          class="list-group-item"
-          v-for="(file, index) in fileInfos"
-          :key="index"
-        >
-          <a :href="file.url">{{ file.name }}</a>
-        </li>
-      </ul>
-    </div>
   </div>
 </template>
 
@@ -42,16 +35,27 @@
 import crudService from "../../services/crudService";
 
 export default {
-  name: "item-file-upload",
+  name: "excel-upload",
   data() {
     return {
+      route: "",
+      ctime: "",
+
       selectedFiles: undefined,
       currentFile: undefined,
       progress: 0,
       message: "",
-
+      dataList: [],
       fileInfos: [],
+      excelJsonData: [],
     };
+  },
+  props :{
+
+  },
+  created() {
+    this.route = this.$route.path + '/import'
+    // inv/trx/excel
   },
   mounted() {
     // crudService.fileDown('/files', 'filename').then((response) => {
@@ -63,7 +67,7 @@ export default {
       this.progress = 0;
 
       this.currentFile = this.selectedFiles.item(0);
-      crudService.fileUpload('/api/item/upload', this.currentFile, (event) => {
+      crudService.upload(this.currentFile, (event) => {
         this.progress = Math.round((100 * event.loaded) / event.total);
       })
         .then((response) => {

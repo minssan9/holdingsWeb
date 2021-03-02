@@ -1,17 +1,23 @@
 <template>
   <div class="home"> 
-    test
-    <!-- <MenuList msg="Welcome to Your Vue.js App" /> -->
+    <nav class="navbar navbar-light ">
+    </nav> 
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-// import MenuList from '../components/MenuList.vue'
-
-export default { 
-  components: {
-    // MenuList
-  }
-}
+  export default {
+    computed: {
+      isAuthenticated() {
+        return store.getters.isAuthenticated
+      }
+    },
+    methods: {
+      onClickLogout() {
+        // LOGOUT 변이 실행 후 리다이렉트
+        store.dispatch('LOGOUT').then(() => this.$router.push('/login'))
+      }
+    }
+  } 
 </script>

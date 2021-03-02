@@ -7,7 +7,7 @@ import authHeader from "./auth";
 
 const crudService = {
   getByPath(route, data) {
-    return axios.get('/api/' + route + '/' + data)
+    return axios.get(`/api/${route}/` + data)
       .then(result => result)
       .catch(({ response }) => {
         if (response.status === Unauthorized) return onUnauthorized()
@@ -18,7 +18,7 @@ const crudService = {
       });
   },
   getRequest(route) {
-    return axios.get('/api/' + route)
+    return axios.get(`/api/${route}/` )
       .then(result => result)
       .catch(({ response }) => {
         if (response.status === Unauthorized) return onUnauthorized()
@@ -29,7 +29,7 @@ const crudService = {
       });
   },
   getDataByParam(route, data) {
-    return axios.get('/api/' + route + "/params", data)
+    return axios.get(`/api/${route}/params`, data)
       .then(result => result)
       .catch(({ response }) => {
         if (response.status === Unauthorized) return onUnauthorized()
@@ -40,7 +40,7 @@ const crudService = {
       });
   },
   update(route, data) {
-    return axios.put('/api/' + route, data)
+    return axios.put(`/api/${route}/`, data)
       .then(result => result)
       .catch(({ response }) => {
         if (response.status === Unauthorized) return onUnauthorized()
@@ -51,7 +51,7 @@ const crudService = {
       });
   },
   save(route, data) {
-    return axios.post('/api/' + route, data, {
+    return axios.post('/api/${playload.route}/', data, {
       headers: {
         'Content-Type': 'multipart/json', 
       }
@@ -65,24 +65,23 @@ const crudService = {
         else if (response.status == NotFound) return onNotFound(response)
         throw Error(response)
       });
-  },
-
-  upload(file, onUploadProgress) {
-    let formData = new FormData();
-
-    formData.append("file", file);
-
-    return http.post("/upload", formData, {
+  }, 
+  excelUpload(route, data, onUploadProgress) {
+    return axios.post(`/api/${route}/excel`, data, {
       headers: {
-        "Content-Type": "multipart/form-data"
-      },
-      onUploadProgress
-    });
-  },
-
-  getFiles() {
-    return http.get("/files");
-  },
+        'Content-Type': 'multipart/form-data',
+        "Process-Data": false,
+      }
+    }, onUploadProgress)
+      .then(result => result)
+      .catch(({ response }) => {
+        if (response.status === Unauthorized) return onUnauthorized()
+        else if (response.status == Forbidden) return onForbidden(response)
+        else if (response.status == BadRequest) return onBadRequest(response)
+        else if (response.status == NotFound) return onNotFound(response)
+        throw Error(response)
+      });
+  },  
   fileUpload(route, data, onUploadProgress) {
     return axios.post('/api/' + route + '/files', data, {
       headers: {

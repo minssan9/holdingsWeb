@@ -3,14 +3,19 @@ import VueRouter from 'vue-router'
 import store from '../store'
 
 import Home from '../views/Home.vue'
-import InvView from '../views/inv/InvView.vue'
+import Menu from '../views/menu.vue'
+import Login from '../views/auth/Login.vue'
+import InvView from '../views/inv/invView.vue'
 import ItemView from '../views/item/ItemView.vue'
 import VuejsAbout from '../views/VuejsAbout.vue'
 
 Vue.use(VueRouter)
 
-const requireAuth = (to, from, next) => {
-  !!store.state.access_token ? next() : next(`/login?returnPath=${encodeURIComponent(from.path)}`)
+const requireAuth = () => (to, from, next) => {
+  // if (from==='/login'){
+  //   from = '/'
+  // }
+  // !!store.state.access_token ? next() : next(`/login?returnPath=${encodeURIComponent(from.path)}`)
 }
 
 const requireManager = (to, from, next) => {
@@ -26,8 +31,6 @@ const requireManager = (to, from, next) => {
     }
   } else
     return next(`/login?returnPath=${encodeURIComponent(from.path)}`)
-
-
 }
 
 const router = new VueRouter({
@@ -36,25 +39,31 @@ const router = new VueRouter({
   scrollBehavior(to, from, savedPosition) {
     return { x: 0, y: 0 }
   },
-  routes : [
+  routes: [
+    { path: '/login', component: Login },
     {
-      path: '/', 
-      component: Home
-    },
-    {
-      path: '/vuejs_about', 
-      component: VuejsAbout
-    },
-    
-    {
-      path: '/item', 
-      component: ItemView
-    },
-    {
-      path: '/inv', 
-      component: InvView
-    }
-  ]
+      path: '/',
+      component: Menu,
+      // beforeEnter: requireAuth(),
+      children: [{
+        path: '/',
+        component: Home
+      },
+      {
+        path: '/vuejs_about',
+        component: VuejsAbout
+      },
+      {
+        path: '/item',
+        component: ItemView
+      },
+      {
+        path: '/inv',
+        component: InvView,
+        props: true,
+        // props : (route) => ({ viewName : route.query.q })
+      }]
+    }]
 })
 
 export default router
