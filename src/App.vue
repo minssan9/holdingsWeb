@@ -3,14 +3,14 @@
     <!-- <Navbar />  -->
     <!-- <HelloWorld msg="Hello~~~~~~~~~" /> -->
     <router-view></router-view>
-    <Footer />
+<!--    <Footer />-->
   </div>
 </template>
 
 <script>
     // import HelloWorld from "./components/HelloWorld.vue";
     // import Navbar from './components/base/Navbar.vue'
-    import Footer from './components/base/Footer.vue'
+    // import Footer from './components/base/Footer.vue'
 
     export default {
     data () {
@@ -19,7 +19,7 @@
         components: {
             // HelloWorld,
             // Navbar,
-            Footer
+            // Footer
         }
     }
 </script>

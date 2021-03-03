@@ -3,13 +3,13 @@ import {
   onUnauthorized, onForbidden, onBadRequest, onNotFound,
   BadRequest, Unauthorized, Forbidden, NotFound
 } from './index'
-import authHeader from "./auth";
+// import authHeader from "./auth";
 
 const crudService = {
   getByPath(route, data) {
     return axios.get('/api/' + route + '/' + data)
       .then(result => result)
-      .catch(({ response }) => {
+      .catch(({response}) => {
         if (response.status === Unauthorized) return onUnauthorized()
         else if (response.status == Forbidden) return onForbidden(response)
         else if (response.status == BadRequest) return onBadRequest(response)
@@ -20,7 +20,7 @@ const crudService = {
   getRequest(route) {
     return axios.get('/api/' + route)
       .then(result => result)
-      .catch(({ response }) => {
+      .catch(({response}) => {
         if (response.status === Unauthorized) return onUnauthorized()
         else if (response.status == Forbidden) return onForbidden(response)
         else if (response.status == BadRequest) return onBadRequest(response)
@@ -31,7 +31,7 @@ const crudService = {
   getDataByParam(route, data) {
     return axios.get('/api/' + route + "/params", data)
       .then(result => result)
-      .catch(({ response }) => {
+      .catch(({response}) => {
         if (response.status === Unauthorized) return onUnauthorized()
         else if (response.status == Forbidden) return onForbidden(response)
         else if (response.status == BadRequest) return onBadRequest(response)
@@ -42,7 +42,7 @@ const crudService = {
   update(route, data) {
     return axios.put('/api/' + route, data)
       .then(result => result)
-      .catch(({ response }) => {
+      .catch(({response}) => {
         if (response.status === Unauthorized) return onUnauthorized()
         else if (response.status == Forbidden) return onForbidden(response)
         else if (response.status == BadRequest) return onBadRequest(response)
@@ -52,13 +52,13 @@ const crudService = {
   },
   save(route, data) {
     return axios.post('/api/' + route, data, {
-      headers: {
-        'Content-Type': 'multipart/json', 
+        headers: {
+          'Content-Type': 'multipart/json',
+        }
       }
-    }
     )
       .then(result => result)
-      .catch(({ response }) => {
+      .catch(({response}) => {
         if (response.status === Unauthorized) return onUnauthorized()
         else if (response.status == Forbidden) return onForbidden(response)
         else if (response.status == BadRequest) return onBadRequest(response)
@@ -72,7 +72,7 @@ const crudService = {
 
     formData.append("file", file);
 
-    return http.post("/upload", formData, {
+    return axios.post("/upload", formData, {
       headers: {
         "Content-Type": "multipart/form-data"
       },
@@ -81,7 +81,7 @@ const crudService = {
   },
 
   getFiles() {
-    return http.get("/files");
+    return axios.get("/files");
   },
   fileUpload(route, data, onUploadProgress) {
     return axios.post('/api/' + route + '/files', data, {
@@ -91,7 +91,7 @@ const crudService = {
       }
     }, onUploadProgress)
       .then(result => result)
-      .catch(({ response }) => {
+      .catch(({response}) => {
         if (response.status === Unauthorized) return onUnauthorized()
         else if (response.status == Forbidden) return onForbidden(response)
         else if (response.status == BadRequest) return onBadRequest(response)
@@ -108,7 +108,7 @@ const crudService = {
     }
     window.location.href = '/api/file?folderPath=' + route + '&filename=' + data;
 
-    return axios.get('/api/file/', param, { responseType: "blob" });
+    return axios.get('/api/file/', param, {responseType: "blob"});
   }
 }
 export default crudService;

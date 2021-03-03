@@ -2,7 +2,6 @@ import axios from 'axios'
 import router from '../router'
 // import authRequest from '@/services/auth'
 
-
 const DOMAIN = '/api'
 
 export const BadRequest = 400
@@ -50,9 +49,9 @@ export const requestFile = (method, url, data) => {
   }).then(result => result)
     .catch(error => error.response)
 }
-  
 
-export const review = { 
+
+export const review = {
   fetch(playload) {
     return request('get', `/api/reviews/${playload.itemId}?page=${playload.page}&size=5&sort=id,DESC`)
   },
@@ -68,7 +67,7 @@ export const review = {
   createFiles(playload) {
     return requestFile('post', '/api/reviews/files', playload)
   }
-} 
+}
 
 
 
