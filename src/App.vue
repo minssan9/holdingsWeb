@@ -1,8 +1,9 @@
 <template>
   <div id="app">
     <!-- <Navbar />  -->
-    <router-view />
-    <!--    <Footer />-->
+    <!-- <HelloWorld msg="Hello~~~~~~~~~" /> -->
+    <router-view></router-view>
+<!--    <Footer />-->
   </div>
 </template>
 
@@ -12,13 +13,13 @@
     // import Footer from './components/base/Footer.vue'
 
     export default {
+    data () {
+      return {}
+    },
         components: {
             // HelloWorld,
             // Navbar,
             // Footer
-        },
-    data () {
-      return {}
-    }
+        }
     }
 </script>
