@@ -6,6 +6,12 @@
 </template>
 
 <script>
+export default {
+  name: 'home',
+  components: {
+    // HelloWorld
+  }
+}
   // export default {
   //   computed: {
   //     isAuthenticated() {

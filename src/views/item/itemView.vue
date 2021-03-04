@@ -10,17 +10,20 @@
       </div>
 
       <ItemFileUpload />
+      <item-list />
     </div>
   </div>
 </template>
 
 <script>
-import ItemFileUpload from '@/components/item/itemUpload.vue';
+import ItemFileUpload from '@/components/item/itemUpload';
+import itemList from '@/components/item/itemUploadList';
 
 export default {
   name: "itemView",
   components: {
-    ItemFileUpload
+    ItemFileUpload,
+    itemList
   }
 };
 </script>

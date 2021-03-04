@@ -18,7 +18,7 @@ const crudService = {
       });
   },
   getRequest(route) {
-    return axios.get(`/api/${route}`)
+    return axios.get(`/api/${route}`)   //?page=${playload.page}&size=10
       .then(result => result)
       .catch(({response}) => {
         if (response.status === Unauthorized) return onUnauthorized()
