@@ -87,7 +87,7 @@ export default {
     upload() {
       this.progress = 0;
       this.currentFile = this.selectedFiles.item(0);
-      crudService.upload(this.route + '/excel', this.currentFile, (event) => {
+      crudService.fileUpload(this.route, this.currentFile, (event) => {
         this.progress = Math.round((100 * event.loaded) / event.total);
       })
         .then((response) => {

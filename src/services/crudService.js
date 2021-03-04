@@ -7,7 +7,7 @@ import {
 
 const crudService = {
   getByPath(route, data) {
-    return axios.get('/api/' + route + '/' + data)
+    return axios.get(`/api/${route}` + '/' + data)
       .then(result => result)
       .catch(({response}) => {
         if (response.status === Unauthorized) return onUnauthorized()
@@ -18,7 +18,7 @@ const crudService = {
       });
   },
   getRequest(route) {
-    return axios.get('/api/' + route)
+    return axios.get(`/api/${route}`)
       .then(result => result)
       .catch(({response}) => {
         if (response.status === Unauthorized) return onUnauthorized()
@@ -29,7 +29,7 @@ const crudService = {
       });
   },
   getDataByParam(route, data) {
-    return axios.get('/api/' + route + "/params", data)
+    return axios.get(`/api/${route}` + "/params", data)
       .then(result => result)
       .catch(({response}) => {
         if (response.status === Unauthorized) return onUnauthorized()
@@ -40,7 +40,7 @@ const crudService = {
       });
   },
   update(route, data) {
-    return axios.put('/api/' + route, data)
+    return axios.put(`/api/${route}`, data)
       .then(result => result)
       .catch(({response}) => {
         if (response.status === Unauthorized) return onUnauthorized()
@@ -51,7 +51,7 @@ const crudService = {
       });
   },
   save(route, data) {
-    return axios.post('/api/' + route, data, {
+    return axios.post(`/api/${route}`, data, {
         headers: {
           'Content-Type': 'multipart/json',
         }
@@ -69,9 +69,7 @@ const crudService = {
 
   upload(file, onUploadProgress) {
     let formData = new FormData();
-
-    formData.append("file", file);
-
+    formData.append(file);
     return axios.post("/upload", formData, {
       headers: {
         "Content-Type": "multipart/form-data"
@@ -80,11 +78,13 @@ const crudService = {
     });
   },
 
-  getFiles() {
-    return axios.get("/files");
+  getFiles(route) {
+    return axios.get(`/api/${route}/files`);
   },
+
   fileUpload(route, data, onUploadProgress) {
-    return axios.post('/api/' + route + '/files', data, {
+    let formData = new FormData().append("file", data);
+    return axios.post(`/api/${route}/files`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
         "Process-Data": false,

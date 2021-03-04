@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 // import store from '../store'
 
 import Home from '@/views/Home.vue'
-import ItemView from '@/views/item/ItemView.vue'
+import ItemView from '@/views/item/itemView.vue'
 import VuejsAbout from '@/views/VuejsAbout.vue'
 
 Vue.use(VueRouter)

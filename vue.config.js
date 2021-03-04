@@ -6,12 +6,13 @@ module.exports = {
   outputDir: path.resolve(__dirname, "./dist"),
   devServer: {
     https: false,
+    host: 'localhost',
     port: 8081,
     proxy: {
-      '/api': {
-        target: API_SERVER_URL,
+      "/api/": {
+        target: 'localhost:34000',
         ws: true,
-        changeOrigin: true,
+        changeOrigin: true
       }
     }
   },

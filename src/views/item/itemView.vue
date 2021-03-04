@@ -15,10 +15,10 @@
 </template>
 
 <script>
-import ItemFileUpload from '@/components/item/ItemUpload.vue';
+import ItemFileUpload from '@/components/item/itemUpload.vue';
 
 export default {
-  name: "ItemView",
+  name: "itemView",
   components: {
     ItemFileUpload
   }
