@@ -1,38 +1,26 @@
 <template>
   <div id="app">
-    <div class="container" style="width:600px">
+    <div
+      class="container"
+      style="width:600px"
+    >
       <div style="margin: 20px">
-        <h3>Halla Holdings</h3>
-        <h4>xxe_item_spec_info_tmp</h4>
-        <h4>item upload Files</h4>
+        <h3>bezkoder.com</h3>
+        <h4>Vue.js upload Files</h4>
       </div>
 
-      <excel-upload></excel-upload>
-
-      <itemList></itemList>
-
+      <ItemFileUpload />
     </div>
   </div>
 </template>
 
 <script>
-import ExcelUpload from "../../components/excel/excelUpload.vue";
-import ItemList from "../../components/item/ItemList.vue";
+import ItemFileUpload from "@/components/item/ItemUpload.vue";
 
 export default {
   name: "ItemView",
-  data() {
-    return {
-      viewName: "defaultViewName",
-      functionName: "defaultFunctionName"
-    };
-  },
-  created() {
-    this.viewName =this.$route.path
-  },
   components: {
-    ExcelUpload,
-    ItemList
+    ItemFileUpload
   }
 };
 </script>

@@ -77,7 +77,7 @@ export default {
       dataList: []
     };
   },
-  methods: { 
+  methods: {
     getData() {
       var data = {
         params: {
@@ -98,10 +98,6 @@ export default {
         .catch(e => {console.log(e);});
     },
     fileDown(data) {
-      var param = {
-        params: {
-          filename: data.attach
-        }}
       crudService.fileDown(this.route, data.attach);
     },
   }

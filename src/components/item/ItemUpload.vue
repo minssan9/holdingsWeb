@@ -1,6 +1,9 @@
 <template>
   <div>
-    <div v-if="currentFile" class="progress">
+    <div
+      v-if="currentFile"
+      class="progress"
+    >
       <div
         class="progress-bar progress-bar-info progress-bar-striped"
         role="progressbar"
@@ -13,51 +16,69 @@
       </div>
     </div>
 
-
     <label class="btn btn-default">
       <input
-        type="file"
         ref="file"
+        type="file"
         @change="selectFile"
-        accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-      />
+      >
     </label>
-    <button class="btn btn-success" :disabled="!selectedFiles" @click="upload">
+
+    <button
+      class="btn btn-success"
+      :disabled="!selectedFiles"
+      @click="upload"
+    >
       Upload
     </button>
 
-    <div class="alert alert-light" role="alert">{{ message }}</div>
+    <div
+      class="alert alert-light"
+      role="alert"
+    >
+      {{ message }}
+    </div>
 
+    <div class="card">
+      <div class="card-header">
+        List of Files
+      </div>
+      <ul class="list-group list-group-flush">
+        <li
+          v-for="(file, index) in fileInfos"
+          :key="index"
+          class="list-group-item"
+        >
+          <a :href="file.url">{{ file.name }}</a>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
 <script>
-import crudService from "../../services/crudService";
+import crudService from "@/services/crudService";
 
 export default {
-  name: "excel-upload",
+  name: "ItemFileUpload",
   data() {
     return {
-      route: "",
-      ctime: "",
-
+      route:"item/upload",
       selectedFiles: undefined,
       currentFile: undefined,
       progress: 0,
       message: "",
       dataList: [],
       fileInfos: [],
-      excelJsonData: [],
     };
   },
-  props :{
-
-  },
-  created() {
-    this.route = this.$route.path + '/import'
-    // inv/trx/excel
-  },
   mounted() {
+    crudService.getRequest(this.route)
+      .then(response => {
+        this.dataList = response.data;
+        console.log(response);
+      })
+      .catch(e => {console.log(e);});
     // crudService.fileDown('/files', 'filename').then((response) => {
     //   this.fileInfos = response.data;
     // });
@@ -65,9 +86,8 @@ export default {
   methods: {
     upload() {
       this.progress = 0;
-
       this.currentFile = this.selectedFiles.item(0);
-      crudService.upload(this.currentFile, (event) => {
+      crudService.upload(this.route + '/excel', this.currentFile, (event) => {
         this.progress = Math.round((100 * event.loaded) / event.total);
       })
         .then((response) => {
