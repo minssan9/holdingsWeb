@@ -14,6 +14,10 @@ import Footer from "@/components/base/Footer.vue";
 
 export default {
   name: "App",
+  created () {
+    // if no subcomponents specify a metaInfo.title, this title will be used
+    document.title='Halla ERP';
+  },
   data() {
     return {};
   },

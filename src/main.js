@@ -3,6 +3,7 @@ import App from './App.vue'
 import axios from 'axios'
 import router from './router'
 import store from './store/index.js'
+import 'bootstrap'
 
 // import VModal from 'vue-js-modal'
 
@@ -14,7 +15,6 @@ new Vue({
     router,
     axios,
     store,
-    components: { App },
     render: h => h(App)
 })
 
