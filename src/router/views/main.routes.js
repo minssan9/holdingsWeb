@@ -1,18 +1,21 @@
-import Home from "@/views/home";
+// import Home from "@/views/home";
+import menu from "@/views/menu";
 import ItemView from '@/views/item/itemView'
 
 
-export default[
+export default [
   {
     path: '/',
-    component: Home
+    component: menu,
+    children: [{
+      path: '/item',
+      component: ItemView,
+    }]
+
   },
   // {
   //   path: '/vuejs_about',
   //   component: VuejsAbout
   // },
-  {
-    path: '/item',
-    component: ItemView,
-  }
+
 ]

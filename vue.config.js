@@ -9,7 +9,7 @@ module.exports = {
     host: 'localhost',
     port: 8081,
     proxy: {
-      "/api/": {
+      "/api": {
         target: 'localhost:34000',
         ws: true,
         changeOrigin: true
